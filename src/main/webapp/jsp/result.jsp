@@ -65,21 +65,24 @@
     <hr style="height:2px;border:none;border-top:2px groove skyblue;"/>
 </div>
 
-<c:forEach var="page" items="${requestScope.docList }">
-    <div class="row">
-        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
-            <div>${page.docIndexScore }</div>
-            <div>${page.path }</div>
-            <div>
+<table class="table">
+    <tr>
+        <td>分数</td>
+        <td>文件地址</td>
+        <td>文件内容</td>
+    </tr>
+    <c:forEach var="page" items="${requestScope.docList }">
+        <tr>
+            <td border=“1px”>${page.docIndexScore }</td>
+            <td border=“1px”>${page.path }</td>
+            <td border=“1px”>
                 <c:forEach var="content" items="${page.searchHighlightTextResult}">
-                    <div>${content}</div>
+                    <div border=“1px”>${content}</div><div></div>
                 </c:forEach>
-            </div>
-        </div>
-    </div>
-    <br>
-</c:forEach>
-
+            </td>
+        </tr>
+    </c:forEach>
+</table>
 <div class="row">
     <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1">
         <ul class="pagination pagination-lg">

@@ -14,6 +14,7 @@ import org.apache.lucene.store.FSDirectory;
 
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchHighlighter {
 	public static ArrayList<HighlightInformation> getDoc(String args, ArrayList<HighlightInformation> resultsFetched)
@@ -64,52 +65,43 @@ public class SearchHighlighter {
 			}
 		}
 
-		// Search the lucene documents
 		TopDocs hits = searcher.search(query, 10);
 
-		// Uses HTML &lt;B&gt;&lt;/B&gt; tag to highlight the searched terms
 		Formatter formatter = new SimpleHTMLFormatter();
 
-		// It scores text fragments by the number of unique query terms found
-		// Basically the matching score in layman terms
 		QueryScorer scorer = new QueryScorer(query);
 
-		// used to markup highlighted terms found in the best sections of a text
 		Highlighter highlighter = new Highlighter(formatter, scorer);
 
-		// It breaks text up into same-size texts but does not split up spans
 		Fragmenter fragmenter = new SimpleSpanFragmenter(scorer, 20);
 
-		// breaks text up into same-size fragments with no concerns over
-		// spotting sentence boundaries.
-		// Fragmenter fragmenter = new SimpleFragmenter(10);
-
-		// set fragmenter to highlighter
 		highlighter.setTextFragmenter(fragmenter);
 
 		// Iterate over found results
 		for (int i = 0; i < hits.scoreDocs.length; i++) {
 			int docid = hits.scoreDocs[i].doc;
 			Document doc = searcher.doc(docid);
-			String title = doc.get("path");
+//			String title = doc.get("path");
 
-			// Get stored text from found document
 			String text = doc.get("contents");
 
-			// Create token stream
 			TokenStream stream = TokenSources.getAnyTokenStream(reader, docid, "contents", analyzer);
 
 			HighlightInformation giveResult = new HighlightInformation();
 			giveResult.setDocHits(hits.totalHits);
 			giveResult.setDocIndexScore(hits.scoreDocs[i].score);
 			giveResult.setPath(doc.get("path"));
-
-			// Get highlighted text fragments
-			String[] frags = highlighter.getBestFragments(stream, text, 30);
-			giveResult.setSearchHighlightTextResult(frags);
-
+			String[] frags = highlighter.getBestFragments(stream, text, 50);
+			List<String> longFrags = new ArrayList<>();
+			for (String s: frags) {
+				if(s.length() > 30){
+					longFrags.add(s);
+				}
+			}
+			String[] strings = new String[longFrags.size()];
+			longFrags.toArray(strings);
+			giveResult.setSearchHighlightTextResult(strings);
 			resultsFetched.add(giveResult);
-
 		}
 		dir.close();
 		return resultsFetched;
