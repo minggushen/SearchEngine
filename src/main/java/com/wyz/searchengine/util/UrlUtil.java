@@ -1,4 +1,4 @@
-package xyz.stackoverflow.searchengine.util;
+package com.wyz.searchengine.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;

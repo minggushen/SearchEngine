@@ -1,4 +1,4 @@
-package xyz.stackoverflow.searchengine.highlight;
+package com.wyz.searchengine.highlight;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;

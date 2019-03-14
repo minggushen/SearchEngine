@@ -1,11 +1,11 @@
-package xyz.stackoverflow.searchengine.controller;
+package com.wyz.searchengine.controller;
 
+import com.wyz.searchengine.highlight.HighlightInformation;
+import com.wyz.searchengine.highlight.SearchHighlighter;
+import com.wyz.searchengine.util.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import xyz.stackoverflow.searchengine.highlight.HighlightInformation;
-import xyz.stackoverflow.searchengine.highlight.SearchHighlighter;
-import xyz.stackoverflow.searchengine.util.Page;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class MainController {
 		List<Page> list = null;
 		try {
 			ArrayList<HighlightInformation> displayData = SearchHighlighter.getDoc(keywords, resultsFetched);
-			map.put("doclist",displayData);
+			map.put("docList",displayData);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

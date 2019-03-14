@@ -1,4 +1,4 @@
-package xyz.stackoverflow.searchengine.entity;
+package com.wyz.searchengine.entity;
 
 import java.sql.Timestamp;
 

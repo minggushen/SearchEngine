@@ -1,4 +1,4 @@
-package xyz.stackoverflow.searchengine.highlight;
+package com.wyz.searchengine.highlight;
 
 public class HighlightInformation {
 

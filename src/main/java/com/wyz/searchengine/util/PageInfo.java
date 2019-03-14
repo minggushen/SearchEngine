@@ -1,4 +1,4 @@
-package xyz.stackoverflow.searchengine.util;
+package com.wyz.searchengine.util;
 
 public class PageInfo {
 

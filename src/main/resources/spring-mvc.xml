@@ -12,15 +12,15 @@
     
     <mvc:annotation-driven/>
     
-    <context:component-scan base-package="xyz.stackoverflow.searchengine.controller"></context:component-scan>
+    <context:component-scan base-package="com.wyz.searchengine.controller"/>
     
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
         <property name="prefix" value="/jsp/"/>  
         <property name="suffix" value=".jsp"/>  
     </bean>
     
-    <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>  
-    <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
-    <mvc:resources location="/img/" mapping="/img/**"></mvc:resources>
-    <mvc:resources location="/fonts/" mapping="/fonts/**"></mvc:resources>
+    <mvc:resources location="/css/" mapping="/css/**"/>
+    <mvc:resources location="/js/" mapping="/js/**"/>
+    <mvc:resources location="/img/" mapping="/img/**"/>
+    <mvc:resources location="/fonts/" mapping="/fonts/**"/>
 </beans>
