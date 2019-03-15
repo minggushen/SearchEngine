@@ -6,7 +6,6 @@ import com.wyz.searchengine.util.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +17,6 @@ import java.io.PrintWriter;
  * @author wangyaozhou
  */
 @Controller
-@RequestMapping("/file")
 public class FileUploadController {
 
     @RequestMapping("/upload")
@@ -36,7 +34,20 @@ public class FileUploadController {
         writer.println("alert('上传并索引成功！');");
         writer.println("</script>");
         writer.flush();
-
         return "index";
     }
+
+//    @RequestMapping("/query")
+//    public String query(@RequestParam("keywords") String keywords, Map<String,Object> map) {
+//        ArrayList<HighlightInformation> resultsFetched = new ArrayList<HighlightInformation>();
+//        List<Page> list = null;
+//        try {
+//            ArrayList<HighlightInformation> displayData = SearchHighlighter.getDoc(keywords, resultsFetched);
+//            map.put("docList",displayData);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        map.put("keywords", keywords);
+//        return "result";
+//    }
 }

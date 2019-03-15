@@ -60,12 +60,6 @@
                     	</span>
                 </div>
             </form>
-            <!--增加文件上传 -->
-            <form name="serForm" action="/file/upload" method="post"  enctype="multipart/form-data" role="form" class="form">
-                <h1>上传文件功能</h1>
-                <input type="file" name="file">
-                <input type="submit" value="upload"/>
-            </form>
         </div>
     </div>
     <hr style="height:2px;border:none;border-top:2px groove skyblue;"/>

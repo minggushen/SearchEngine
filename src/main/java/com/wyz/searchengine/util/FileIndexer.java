@@ -102,10 +102,11 @@ public class FileIndexer {
 
 			Document doc = new Document();
             Path fileName = file.getFileName();
+            String fileNameString = fileName.toString();
             doc.add(new StringField("path", file.toString(), Store.YES));
             doc.add(new LongPoint("modified", lastModified));
             doc.add(new TextField(FIELD_NAME, file.toString(), Store.YES));
-            if (fileName.endsWith("pdf")) {
+            if (fileNameString.endsWith("pdf")) {
 				PDFParser parser = new PDFParser(stream);
 				parser.parse();
 				COSDocument cd = parser.getDocument();
@@ -113,13 +114,13 @@ public class FileIndexer {
 				String text = stripper.getText(new PDDocument(cd));
 				cd.close();
 				doc.add(new TextField("contents", text, Store.YES));
-			} else if (fileName.endsWith("doc")){
+			} else if (fileNameString.endsWith("doc")){
                 FileInputStream fis = new FileInputStream(file.toFile());
                 HWPFDocument document = new HWPFDocument(fis);
                 StringBuilder text = document.getText();
 				doc.add(new TextField("contents", text.toString(), Store.YES));
                 fis.close();
-			}else if (fileName.endsWith("docx")){
+			}else if (fileNameString.endsWith("docx")){
                 FileInputStream fis = new FileInputStream(file.toFile());
                 XWPFDocument xdoc = new XWPFDocument(fis);
                 XWPFWordExtractor extractor = new XWPFWordExtractor(xdoc);

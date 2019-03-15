@@ -42,7 +42,7 @@
           		</form>
 				<!--增加文件上传 -->
 				<br><br><br>
-				<form class="form-inline" role="form" action="/file/upload" enctype="multipart/form-data" method="post">
+				<form class="form-inline" role="form" action="/upload" enctype="multipart/form-data" method="post">
 					<div class="form-group">
 						<label class="sr-only" for="inputfile">文件输入</label>
 						<input type="file" name="file" id="inputfile" class="file">

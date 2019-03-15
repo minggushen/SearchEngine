@@ -18,7 +18,7 @@ public class MainController {
 	public String index() {
 		return "index";
 	}
-	
+
 	@RequestMapping("/query")
 	public String query(@RequestParam("keywords") String keywords, Map<String,Object> map) {
 		ArrayList<HighlightInformation> resultsFetched = new ArrayList<HighlightInformation>();
