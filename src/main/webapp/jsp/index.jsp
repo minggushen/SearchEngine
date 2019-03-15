@@ -36,13 +36,24 @@
             		<div class="input-group input-group-lg">
               			<input type="text" class="form-control" id="keywords" name="keywords">
               			<span class="input-group-btn">
-                			<input class="btn btn-primary" type="submit" id="submit" value="摆渡一下">
+                			<input class="btn btn-primary" type="submit" id="submit" value="搜索一下">
               			</span>
             		</div>
           		</form>
+				<!--增加文件上传 -->
+				<br><br><br>
+				<form class="form-inline" role="form" action="/file/upload" enctype="multipart/form-data" method="post">
+					<div class="form-group">
+						<label class="sr-only" for="inputfile">文件输入</label>
+						<input type="file" name="file" id="inputfile" class="file">
+					</div>
+					<button type="submit" class="btn btn-default">提交</button>
+				</form>
         	</div>
       	</div>
     </div>
+
+
 
     <script>
         //宇宙特效

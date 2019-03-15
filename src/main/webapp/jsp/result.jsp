@@ -56,9 +56,15 @@
                     <input type="text" class="form-control" id="keywords" name="keywords"
                            value="${requestScope.keywords }">
                     <span class="input-group-btn">
-                        	<input class="btn btn-primary" type="submit" id="submit" value="摆渡一下">
+                        	<input class="btn btn-primary" type="submit" id="submit" value="搜索一下">
                     	</span>
                 </div>
+            </form>
+            <!--增加文件上传 -->
+            <form name="serForm" action="/file/upload" method="post"  enctype="multipart/form-data" role="form" class="form">
+                <h1>上传文件功能</h1>
+                <input type="file" name="file">
+                <input type="submit" value="upload"/>
             </form>
         </div>
     </div>
