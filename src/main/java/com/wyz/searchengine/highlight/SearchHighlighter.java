@@ -1,5 +1,6 @@
 package com.wyz.searchengine.highlight;
 
+import com.wyz.searchengine.config.UploadConfig;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
@@ -19,8 +20,7 @@ import java.util.List;
 public class SearchHighlighter {
 	public static ArrayList<HighlightInformation> getDoc(String args, ArrayList<HighlightInformation> resultsFetched)
 			throws Exception {
-		String INDEX_DIR = "D:\\lucene\\mine\\out";
-		Directory dir = FSDirectory.open(Paths.get(INDEX_DIR));
+		Directory dir = FSDirectory.open(Paths.get(UploadConfig.getOutPath()));
 		IndexReader reader = DirectoryReader.open(dir);
 		IndexSearcher searcher = new IndexSearcher(reader);
 		Analyzer analyzer = new StandardAnalyzer();

@@ -14,15 +14,15 @@ public class UploadConfig {
     @Value("${upload.path:null}")
     public void setPath(String path) {
         if(path == null || "null".equals(path)){
-            path = "D:\\lucene\\mine\\";
+            path = "D:\\lucene\\mine";
         }
         UploadConfig.path = path;
     }
 
     public static String getOutPath(){
-        return path + "out\\";
+        return path + "\\out\\";
     }
     public static String getInPath(){
-        return path + "in\\";
+        return path + "\\in\\";
     }
 }

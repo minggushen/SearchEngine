@@ -39,12 +39,12 @@ public class FileIndexer {
 	public static void indexFile(String docsPath,String indexPath){
 
 		File docsPathFile = new File(docsPath);
-		if(docsPathFile.isDirectory() && !docsPathFile.exists()){
+		if(!docsPathFile.exists()){
 			docsPathFile.mkdirs();
 		}
 
 		File indexPathFile = new File(indexPath);
-		if(indexPathFile.isDirectory() && !indexPathFile.exists()){
+		if(!indexPathFile.exists()){
 			indexPathFile.mkdirs();
 		}
 
