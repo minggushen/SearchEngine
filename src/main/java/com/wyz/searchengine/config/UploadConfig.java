@@ -14,7 +14,12 @@ public class UploadConfig {
     @Value("${upload.path:null}")
     public void setPath(String path) {
         if(path == null || "null".equals(path)){
-            path = "D:\\lucene\\mine";
+            //如果是windows
+            if(System.getProperty("os.name").toLowerCase().startsWith("win")){
+                path = "D:\\lucene\\mine";
+            }else {
+                path = "\\opt\\lucene\\mine";
+            }
         }
         UploadConfig.path = path;
     }
