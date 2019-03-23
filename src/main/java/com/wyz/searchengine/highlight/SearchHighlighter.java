@@ -20,25 +20,12 @@ public class SearchHighlighter {
 	public static ArrayList<HighlightInformation> getDoc(String args, ArrayList<HighlightInformation> resultsFetched)
 			throws Exception {
 		String INDEX_DIR = "D:\\lucene\\mine\\out";
-
-		// Get directory reference
 		Directory dir = FSDirectory.open(Paths.get(INDEX_DIR));
-
-		// Index reader - an interface for accessing a point-in-time view of a
-		// lucene index
 		IndexReader reader = DirectoryReader.open(dir);
-
-		// Create lucene searcher. It search over a single IndexReader.
 		IndexSearcher searcher = new IndexSearcher(reader);
-
-		// analyzer with the default stop words
 		Analyzer analyzer = new StandardAnalyzer();
-
-		// Query parser to be used for creating TermQuery
 		QueryParser qp = new QueryParser("contents", analyzer);
-
 		Query query = null;
-
 		if (args.toLowerCase().contains("not")) {
 			String[] split = args.toLowerCase().split("not");
 			Query q1 = qp.parse(split[0]);
@@ -66,27 +53,17 @@ public class SearchHighlighter {
 		}
 
 		TopDocs hits = searcher.search(query, 10);
-
 		Formatter formatter = new SimpleHTMLFormatter();
-
 		QueryScorer scorer = new QueryScorer(query);
-
 		Highlighter highlighter = new Highlighter(formatter, scorer);
-
 		Fragmenter fragmenter = new SimpleSpanFragmenter(scorer, 20);
-
 		highlighter.setTextFragmenter(fragmenter);
 
-		// Iterate over found results
 		for (int i = 0; i < hits.scoreDocs.length; i++) {
 			int docid = hits.scoreDocs[i].doc;
 			Document doc = searcher.doc(docid);
-//			String title = doc.get("path");
-
 			String text = doc.get("contents");
-
 			TokenStream stream = TokenSources.getAnyTokenStream(reader, docid, "contents", analyzer);
-
 			HighlightInformation giveResult = new HighlightInformation();
 			giveResult.setDocHits(hits.totalHits);
 			giveResult.setDocIndexScore(hits.scoreDocs[i].score);
