@@ -24,6 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +37,16 @@ public class FileIndexer {
 	public static final String FIELD_NAME = "filename";
 
 	public static void indexFile(String docsPath,String indexPath){
+
+		File docsPathFile = new File(docsPath);
+		if(docsPathFile.isDirectory() && !docsPathFile.exists()){
+			docsPathFile.mkdirs();
+		}
+
+		File indexPathFile = new File(indexPath);
+		if(indexPathFile.isDirectory() && !indexPathFile.exists()){
+			indexPathFile.mkdirs();
+		}
 
 		// Input Path Variable
 		final Path docDir = Paths.get(docsPath);
@@ -73,10 +84,7 @@ public class FileIndexer {
 				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
 					try {
 						FileHandlingParser fileParser = new FileHandlingParser();
-
 						fileParser.checkFile(file);
-						// Index this file
-
 						indexDoc(writer, file, attrs.lastModifiedTime().toMillis());
 					} catch (IOException ioe) {
                         logger.error("io异常！",ioe);
@@ -94,12 +102,11 @@ public class FileIndexer {
 		}
 	}
 
-	static void indexDoc(IndexWriter writer, Path file, long lastModified) throws IOException {
+	static void indexDoc(IndexWriter writer, Path file, long lastModified) {
 		try (InputStream stream = Files.newInputStream(file)) {
 
-			String fileType = file.toString().substring(file.toString().length() - 4, file.toString().length());
+			String fileType = file.toString().substring(file.toString().length() - 4);
             logger.info("indexDoc:- " + file + " fileType is:- " + fileType);
-
 			Document doc = new Document();
             Path fileName = file.getFileName();
             String fileNameString = fileName.toString();
